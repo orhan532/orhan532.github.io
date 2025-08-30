@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OyunDünyası - Premium Oyun Platformu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .game-card {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(86, 76, 225, 0.5);
+        }
+        
+        .game-image {
+            height: 200px;
+            background: linear-gradient(45deg, #2c3e50, #4ca1af);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .loading-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+        
+        .hero-pattern {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="rgba(255,255,255,0.05)"><path d="M0 .5H31.5V32"/></svg>');
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5),
+                         0 0 20px rgba(102, 126, 234, 0.3),
+                         0 0 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .category-badge {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-black/80 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-gamepad text-2xl"></i>
+                    </div>
+                    <h1 class="orbitron text-2xl font-bold text-white">OyunDünyası</h1>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-purple-400 transition-colors">Ana Sayfa</a>
+                    <a href="#" class="text-white hover:text-purple-400 transition-colors">Oyunlar</a>
+                    <a href="#" class="text-white hover:text-purple-400 transition-colors">Kategoriler</a>
+                    <a href="#" class="text-white hover:text-purple-400 transition-colors">İndirilenler</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition-colors">
+                        <i class="fas fa-search text-white"></i>
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 py-2 rounded-lg text-white font-semibold transition-all">
+                        Giriş Yap
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern relative overflow-hidden">
+        <div class="container mx-auto px-4 py-20">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="orbitron text-5xl md:text-6xl font-bold text-white mb-6 glow-text">
+                    Oyun Dünyasına Hoş Geldiniz
+                </h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    En popüler ve eğlenceli oyunları keşfedin. Sınırsız eğlence, sınırsız macera!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary px-8 py-4 rounded-xl text-lg font-semibold pulse">
+                        <i class="fas fa-play mr-2"></i>Hemen Oyna
+                    </button>
+                    <button class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold text-white transition-all">
+                        <i class="fas fa-star mr-2"></i>Popüler Oyunlar
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-20 h-20 bg-purple-600/20 rounded-full blur-xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-blue-600/20 rounded-full blur-xl"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-purple-600/15 rounded-full blur-xl"></div>
+        </div>
+    </section>
+
+    <!-- Featured Games -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    Öne Çıkan Oyunlar
+                </h3>
+                <p class="text-gray-400 text-lg">
+                    En çok oynanan ve en yeni oyunlar burada!
+                </p>
+            </div>
+
+            <div class="game-grid">
+                <!-- Game 1 -->
+                <div class="game-card group">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4e775b00-0f7d-480d-b9ca-2dd0caf71b51.png" alt="Epic fantasy RPG game with knights and dragons in a medieval landscape" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge px-3 py-1 rounded-full text-xs text-purple-300">RPG</span>
+                            <div class="flex items-center space-x-1 text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <span class="text-sm">4.8</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Epic Fantasy Quest</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Ortaçağ dünyasında epik bir maceraya atılın. Ejderhalarla savaşın, krallıklar kurun.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-purple-400 font-semibold">2.4GB</span>
+                            <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold game-load-btn" data-game="Epic Fantasy Quest">
+                                <i class="fas fa-download mr-2"></i>Yükle
+                            </button>
+                        </div>
+                        <div class="loading-bar mt-3 hidden">
+                            <div class="progress w-0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 2 -->
+                <div class="game-card group">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/86e07612-7983-43dc-ba12-46eb875cdcbe.png" alt="Futuristic racing game with neon-lit hovercars in a cyberpunk city" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge px-3 py-1 rounded-full text-xs text-purple-300">Yarış</span>
+                            <div class="flex items-center space-x-1 text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <span class="text-sm">4.6</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Neon Velocity</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Geleceğin şehirlerinde hız limitlerini zorlayın. Hover araçlarıyla yarışın.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-purple-400 font-semibold">1.8GB</span>
+                            <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold game-load-btn" data-game="Neon Velocity">
+                                <i class="fas fa-download mr-2"></i>Yükle
+                            </button>
+                        </div>
+                        <div class="loading-bar mt-3 hidden">
+                            <div class="progress w-0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 3 -->
+                <div class="game-card group">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c33f83f0-664e-4ea8-ad48-ae0c9ae9fe93.png" alt="Space exploration game with spacecraft and alien planets in a cosmic setting" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge px-3 py-1 rounded-full text-xs text-purple-300">Macera</span>
+                            <div class="flex items-center space-x-1 text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <span class="text-sm">4.9</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Cosmic Explorer</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Uzayın derinliklerini keşfedin. Yeni gezegenler bulun, uzaylı uygarlıklarla tanışın.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-purple-400 font-semibold">3.1GB</span>
+                            <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold game-load-btn" data-game="Cosmic Explorer">
+                                <i class="fas fa-download mr-2"></i>Yükle
+                            </button>
+                        </div>
+                        <div class="loading-bar mt-3 hidden">
+                            <div class="progress w-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Games Section -->
+    <section class="py-16 bg-black/20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="orbitron text-3xl md:text-4xl font-bold text-white mb-4">
+                    Tüm Oyunlar
+                </h3>
+                <p class="text-gray-400 text-lg">
+                    Kütüphanemizdeki tüm oyunları keşfedin
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Additional games would be listed here -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a8ce7143-2991-49c9-909f-736b7ccae23f.png" alt="Zombie survival game with post-apocalyptic cityscape and survivors" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-white mb-2">Zombie Survival</h4>
+                        <p class="text-gray-400 text-sm mb-3">Zombi kıyametinden hayatta kalın</p>
+                        <button class="btn-primary w-full py-2 rounded-lg text-sm game-load-btn" data-game="Zombie Survival">
+                            <i class="fas fa-download mr-2"></i>Yükle
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e4a3f297-63dc-4a7b-8b7d-6adaa75c457d.png" alt="Puzzle adventure game with mystical artifacts and ancient ruins" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-white mb-2">Ancient Puzzles</h4>
+                        <p class="text-gray-400 text-sm mb-3">Antik bulmacaları çözün</p>
+                        <button class="btn-primary w-full py-2 rounded-lg text-sm game-load-btn" data-game="Ancient Puzzles">
+                            <i class="fas fa-download mr-2"></i>Yükle
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ae8c776f-412e-4f10-b366-bfefe3f14e0e.png" alt="Sports game with football stadium and players in action" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-white mb-2">Ultimate Football</h4>
+                        <p class="text-gray-400 text-sm mb-3">Gerçekçi futbol deneyimi</p>
+                        <button class="btn-primary w-full py-2 rounded-lg text-sm game-load-btn" data-game="Ultimate Football">
+                            <i class="fas fa-download mr-2"></i>Yükle
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cc9c654b-9cdc-4b08-963f-90584e3a9151.png" alt="Strategy game with medieval castle and army formations" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-white mb-2">Kingdom Wars</h4>
+                        <p class="text-gray-400 text-sm mb-3">Krallığınızı yönetin</p>
+                        <button class="btn-primary w-full py-2 rounded-lg text-sm game-load-btn" data-game="Kingdom Wars">
+                            <i class="fas fa-download mr-2"></i>Yükle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 border-t border-white/10 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-gamepad text-xl"></i>
+                        </div>
+                        <span class="orbitron text-xl font-bold">OyunDünyası</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        En iyi oyun deneyimini sunmak için buradayız. Kaliteli oyunlar, sorunsuz indirme.
+                    </p>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Bağlantılar</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">İletişim</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Destek</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">SSS</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Kategoriler</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Aksiyon</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Macera</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">RPG</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Strateji</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold mb-4">Bizi Takip Edin</h5>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-discord text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 OyunDünyası. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-download text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2" id="modalGameName">Oyun Yükleniyor</h3>
+                <p class="text-gray-400 mb-6">Lütfen bekleyin...</p>
+                
+                <div class="loading-bar bg-gray-700 rounded-full h-2 mb-6">
+                    <div class="progress bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full w-0" id="modalProgress"></div>
+                </div>
+                
+                <div class="text-gray-400 text-sm mb-6">
+                    <span id="progressPercentage">0%</span> tamamlandı
+                </div>
+                
+                <button id="cancelBtn" class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg text-white font-semibold transition-colors">
+                    İptal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameLoadButtons = document.querySelectorAll('.game-load-btn');
+            const loadingModal = document.getElementById('loadingModal');
+            const modalGameName = document.getElementById('modalGameName');
+            const modalProgress = document.getElementById('modalProgress');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const cancelBtn = document.getElementById('cancelBtn');
+            
+            let currentLoading = null;
+            
+            gameLoadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const gameName = this.getAttribute('data-game');
+                    startGameLoading(gameName);
+                });
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                if (currentLoading) {
+                    clearInterval(currentLoading);
+                    loadingModal.classList.add('hidden');
+                    showNotification('Yükleme iptal edildi: ' + modalGameName.textContent, 'error');
+                }
+            });
+            
+            function startGameLoading(gameName) {
+                modalGameName.textContent = gameName;
+                modalProgress.style.width = '0%';
+                progressPercentage.textContent = '0%';
+                loadingModal.classList.remove('hidden');
+                
+                let progress = 0;
+                
+                currentLoading = setInterval(() => {
+                    progress += Math.random() * 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(currentLoading);
+                        setTimeout(() => {
+                            loadingModal.classList.add('hidden');
+                            showNotification(gameName + ' başarıyla yüklendi!', 'success');
+                        }, 500);
+                    }
+                    
+                    modalProgress.style.width = progress + '%';
+                    progressPercentage.textContent = Math.round(progress) + '%';
+                }, 100);
+            }
+            
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg transform transition-all duration-300 ${
+                    type === 'success' ? 'bg-green-600' : 'bg-red-600'
+                } text-white font-semibold`;
+                notification.textContent = message;
+                notification.style.zIndex = '1000';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Add some interactive effects
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
