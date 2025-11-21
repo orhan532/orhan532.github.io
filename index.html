@@ -558,6 +558,7 @@ button {
     padding: 4rem 2rem 2rem;
     background: var(--primary);
     color: #fff;
+    font-family: Arial, sans-serif;
 }
 
 .footer-grid {
@@ -615,6 +616,21 @@ button {
     text-align: center;
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.9rem;
+}
+.footer-social .social-icon {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+.footer-social .social-icon i {
+  font-size: 2rem;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 /* ===== PAYMENT MODAL ===== */
@@ -930,110 +946,150 @@ button {
     background: var(--accent);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        padding: 1rem 0;
-        gap: 0;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .nav-link {
-        display: block;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
+/* ===== PRODUCT DETAIL MODAL ===== */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
 }
 
-@media (max-width: 480px) {
-    .navbar .container {
-        padding: 0 10px;
-    }
-
-    .logo {
-        font-size: 1rem;
-        gap: 8px;
-        min-width: 0;
-    }
-
-    .logo img {
-        height: 40px;
-        max-width: 120px;
-    }
-
-    .nav-actions {
-        gap: 1rem;
-    }
-
-    .nav-menu {
-        margin-left: 0;
-        gap: 0.5rem;
-    }
-
-    .shopier-btn {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-    }
-
-    .hamburger {
-        margin-left: 8px;
-    }
-
-    .navbar {
-        padding: 0.5rem 0;
-    }
-
-    .hero-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .promo-banners {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery-header h2 {
-        font-size: 1.8rem;
-    }
+.product-modal.active {
+    display: flex;
 }
+
+.product-detail-container {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.product-detail-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+.product-detail-content h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.product-detail-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.product-detail-meta span {
+    background: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.product-detail-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.product-detail-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.detail-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.detail-btn.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a1a1a 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.detail-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.detail-btn.secondary {
+    background: #f5f5f5;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.detail-btn.secondary:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+
+
+
+
+
+
     </style>referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -1051,25 +1107,20 @@ button {
                 <li><a href="urunler.html" target="_blank" class="nav-link">Eserlerimi Keşfet</a></li>
                 <li><a href="#hak" class="nav-link">Sanatçı Hakkında</a></li>
                 <li><a href="#iletisim" class="nav-link">İletişim</a></li>
+                <li><a href="muralart.html" class="nav-link" target="_blank">Muralart</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="https://www.shopier.com/mervegezer" target="_blank" class="shopier-btn">Shopier</a>
               
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+          
     </nav>
 
     <!-- Hero Banner -->
     <section class="hero-banner">
         <div class="hero-content">
-            <h1>Sanatın Gücü</h1>
-            <p>Renk ve Duyguların Birleşimi</p>
-            <a href="urunler.html" target="_blank" class="cta-button">Eserlerimi Keşfet Keşfet</a>
+            <h1>Merve Gezer</h1>
+            <p>Sanat Atölyesi</p>
+            <a href="urunler.html" target="_blank" class="cta-button">Eserlerimi Keşfet</a>
         </div>
     </section>
 
@@ -1083,7 +1134,12 @@ button {
         <div class="promo-item featured">
             <h3>Printer Baskı</h3>
             <p>Kaliteli Baskı</p>
-            <a href="#"  target="_blank" class="promo-link">Şimdi Keşfet →</a>
+            <a href="urunler.html"  target="_blank" class="promo-link">Şimdi Keşfet →</a>
+        </div>
+        <div class="promo-item">
+            <h3>Muralart</h3>
+            <p>Kaliteli Duvar Resimleri</p>
+            <a href="muralart.html"  target="_blank" class="promo-link">Şimdi Keşfet →</a>
         </div>
        
     </div>
@@ -1100,17 +1156,17 @@ button {
                 <!-- Product 1 -->
                 <div class="gallery-item">
                     <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=500&h=500&fit=crop" alt="Eser 1">
+                        <img src="" alt="Eser 1">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('Güneşin Yükselişi', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=800&h=800&fit=crop', '₺2.500', 'Orijinal Dijital Sanat', '60x80 cm', 'Güneşin yükselişi, umudun ve yenilemenin sembolü olarak bu eserle canlandırılmıştır. Canlı renkler ve dinamik formlar, doğanın güzelliğini ve hayatın kesintisiz hareketini yansıtır.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
                         <h3>"Güneşin Yükselişi" - Premium Baskı</h3>
-                        <p class="product-type">Orijinal Dijital Sanat </p>
+                        <p class="product-type">Orijinal Dijital Sanat</p>
                         <div class="price-section">
                             <span class="price">₺2.500</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('Güneşin Yükselişi', 2500)">Satın Al</button>
                         </div>
                     </div>
                 </div>
@@ -1120,15 +1176,15 @@ button {
                     <div class="gallery-image">
                         <img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 2">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('Sessiz Anlama', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=800&h=800&fit=crop', '₺3.200', 'Akrilik Boyama', '70x100 cm', 'Bu eserde sessizliğin derinliği ve içsel huzur aranmıştır. Yumuşak renkler ve soyut formlar, göze görünmayan duyguların görünür hale getirilmesidir.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
                         <h3>"Sessiz Anlama" - Canvas Baskı</h3>
-                        <p class="product-type">Akrilik |</p>
+                        <p class="product-type">Akrilik</p>
                         <div class="price-section">
                             <span class="price">₺3.200</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('Sessiz Anlama', 3200)">Satın Al</button>
                         </div>
                     </div>
                 </div>
@@ -1138,15 +1194,15 @@ button {
                     <div class="gallery-image">
                         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=500&fit=crop" alt="Eser 3">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('Rüya Görenlerin Sanatı', 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=800&fit=crop', '₺5.800', 'Dijital Kolaj', '50x70 cm', 'Rüyalar ve hayal dünyasının sınırlarını çizip, gerçeklikle fantezinin buluşma noktasını araştırmaktadır. Sürrealist etkileri gözlemlenebilen bu eser, izleyicileri kendi hayal dünyasına davet ediyor.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
                         <h3>"Rüya Görenlerin Sanatı" - Sınırlı Baskı</h3>
-                        <p class="product-type">Dijital Kolaj </p>
+                        <p class="product-type">Dijital Kolaj</p>
                         <div class="price-section">
                             <span class="price">₺5.800</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('Rüya Görenlerin Sanatı', 5800)">Satın Al</button>
                         </div>
                     </div>
                 </div>
@@ -1156,7 +1212,7 @@ button {
                     <div class="gallery-image">
                         <img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 4">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('Doğanın Sihri', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=800&h=800&fit=crop', '₺1.800', 'Su Rengisi', '40x60 cm', 'Doğanın her köşesinde gizli kalan sihir, bu eserle hafif ve şeffaf su rengisi tekniğiyle ortaya çıkarılmıştır. Organik formlar ve doğal renkler, izleyiciyi doğanın kucağına davet ediyor.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
@@ -1164,7 +1220,7 @@ button {
                         <p class="product-type">Su Rengisi</p>
                         <div class="price-section">
                             <span class="price">₺1.800</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('Doğanın Sihri', 1800)">Satın Al</button>
                         </div>
                     </div>
                 </div>
@@ -1174,15 +1230,15 @@ button {
                     <div class="gallery-image">
                         <img src="https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=500&h=500&fit=crop" alt="Eser 5">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('İç Huzur', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=800&h=800&fit=crop', '₺4.500', 'Tuval Üzerine Yağlıboya', '80x120 cm', 'İç dünyanın barışı ve huzuru, zengin doku ve yağlıboya teknikleriyle ifade edilmiştir. Derinlik ve katmanlar, göz kamaştırıcı bir deneyim sunmaktadır.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
                         <h3>"İç Huzur" - Premium Canvas</h3>
-                        <p class="product-type">Tuval Üzerine Yağlıboya </p>
+                        <p class="product-type">Tuval Üzerine Yağlıboya</p>
                         <div class="price-section">
                             <span class="price">₺4.500</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('İç Huzur', 4500)">Satın Al</button>
                         </div>
                     </div>
                 </div>
@@ -1192,7 +1248,7 @@ button {
                     <div class="gallery-image">
                         <img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 6">
                         <div class="gallery-overlay">
-                            <button class="view-btn">Detay İncele</button>
+                            <button class="view-btn" onclick="openProductModal('Işığın Dansı', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=800&h=800&fit=crop', '₺6.200', 'Dijital Baskı', '70x100 cm', 'Işığın dinamik hareketi ve renkli salınımları, bu eserde soyut formlarla harmanlanmış. Canlılık ve enerji, her pikselde hissedilmektedir.')">Detay İncele</button>
                         </div>
                     </div>
                     <div class="product-info">
@@ -1200,14 +1256,14 @@ button {
                         <p class="product-size">70x100 cm</p>
                         <div class="price-section">
                             <span class="price">₺6.200</span>
-                            <button class="add-to-cart-btn">Satın Al</button>
+                            <button class="primary-btn" onclick="addToCart('Işığın Dansı', 6200)">Satın Al</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="view-all">
-                <button class="primary-btn">Tüm Eserler Gözat</button>
+             <a href="urunler.html">   <button  class="primary-btn">Tüm Eserler Gözat</button></a>
             </div>
         </div>
     </section>
@@ -1234,7 +1290,7 @@ button {
                         </div>
                     </div>
 
-                    <button class="secondary-btn">Sanatçıyı Tanı</button>
+                   <a href="hakkında.html"> <button class="secondary-btn">Sanatçıyı Tanı</button></a>
                 </div>
                 
                 <div class="about-image">
@@ -1250,36 +1306,84 @@ button {
     <!-- Footer -->
     <footer class="footer" id="iletisim">
         <div class="container">
-            <div class="footer-contact" style="text-align:center; padding: 2rem 0; color: #fff;">
-                <h2>İletişim</h2>
-                <p>📧 info@studio.com</p>
-                <p>📍 Evka 3 Bornava İzmir,Türkiye</p>
+            <div class="footer-contact" style="text-align:center; padding: 2rem 0; color: #fff; font-family: Arial, sans-serif;">
+                <h2 style="font-family: Arial, sans-serif;">İletişim</h2>
+                <p style="font-family: Arial, sans-serif;">📧 info@studio.com</p>
+                <p style="font-family: Arial, sans-serif;">📍 Evka 3 Bornava İzmir, Türkiye</p>
             </div>
             <div class="footer-social" style="text-align:center; margin-bottom: 1.5rem;">
-                <a href="https://www.instagram.com/gezermerve.art?igsh=MXVwdTQ0bndneWp6Zw== target=" target="_blank" class="social-icon" title="Instagram" style="margin:0 10px;font-size:2rem;color:#fff;display:inline-block;">
-                    <i class="fa-brands fa-instagram"></i>Instagram
+                <a href="https://www.instagram.com/gezermerve.art?igsh=MXVwdTQ0bndneWp6Zw==" target="_blank" class="social-icon" title="Instagram" style="margin:0 10px;font-size:2rem;color:#fff;display:inline-block;">
+                    <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
                 <a href="https://youtube.com/@gezermerveart?si=wJwJpPr-iCMgn-e2" target="_blank" class="social-icon" title="Youtube" style="margin:0 10px;font-size:2rem;color:#fff;display:inline-block;">
-                    <i class="fa-brands fa-youtube"></i>Youtube
+                    <i class="fa-brands fa-youtube"></i> Youtube
                 </a>
             </div>
-            <div class="footer-bottom" style="text-align:center; padding: 1rem 0; color: #fff;">
+            <div class="footer-bottom" style="text-align:center; padding: 1rem 0; color: #fff; font-family: Arial, sans-serif;">
                 <p>&copy; 2025 STUDIO. Tüm hakları saklıdır.</p>
+            </div>
         </div>
     </footer>
 
 
-            
-
-              
-
-                  
- 
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="product-detail-container">
+            <img id="modalImage" src="" alt="Ürün" class="product-detail-image">
+            <div class="product-detail-content">
+                <button class="close-modal" onclick="closeProductModal()">&times;</button>
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <div class="product-detail-meta">
+                        <span id="modalType"></span>
+                        <span id="modalSize"></span>
+                    </div>
+                    <div class="product-detail-price" id="modalPrice"></div>
+                    <p class="product-detail-description" id="modalDescription"></p>
+                </div>
+                <div class="product-detail-actions">
+                    <button class="detail-btn primary" onclick="addToCartFromModal()">Sepete Ekle</button>
+                    <button class="detail-btn secondary" onclick="closeProductModal()">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
+    <script>
+        let currentProduct = {};
+
+        function openProductModal(title, image, price, type, size, description) {
+            currentProduct = { title, price };
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalType').textContent = type;
+            document.getElementById('modalSize').textContent = size;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        function addToCart(productName, price) {
+            alert(`"${productName}" (${price}₺) sepete eklendi!`);
+        }
+
+        function addToCartFromModal() {
+            addToCart(currentProduct.title, currentProduct.price);
+            closeProductModal();
+        }
+
+        // Modal dışında tıklanırsa kapat
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductModal();
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
 
