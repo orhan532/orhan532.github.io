@@ -60,15 +60,16 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    position: relative; /* hamburger için referans */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 50px;
-    font-size: 20rem;
+    gap: 12px;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 50px;
+    letter-spacing: 0.5px;
     color: var(--primary);
     text-decoration: none;
 }
@@ -119,12 +120,13 @@ button {
         font-size: 0.9rem;
     }
 }
+/* Menü sağa yasla */
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 3rem;
     flex: 1;
-    margin-left: 3rem;
+    margin-left: 3rem; /* masaüstü: eski konumuna geri */
 }
 
 .nav-link {
@@ -144,6 +146,11 @@ button {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    position: static; /* masaüstü: statik, satır içi davranış */
+    transform: none;
+    left: auto;
+    top: auto;
+    z-index: auto;
 }
 
 .search-btn, .account-btn {
@@ -160,17 +167,34 @@ button {
 
 .hamburger {
     display: none;
+    width: 44px;
+    height: 36px;
+    border: none;
+    background: transparent;
     flex-direction: column;
+    justify-content: center;
+    gap: 6px;
     cursor: pointer;
+    padding: 4px;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1500;
 }
 
 .hamburger span {
-    width: 25px;
-    height: 2px;
+    display: block;
+    height: 3px;
     background: var(--text);
-    margin: 5px 0;
-    transition: 0.3s;
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .22s ease;
 }
+
+/* aktif (çarpı) görünümü */
+.hamburger.active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity: 0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
 
 .shopier-btn {
     display: inline-block;
@@ -1084,58 +1108,100 @@ button {
     color: #fff;
 }
 
-/* ===== RESPONSIVE STYLES ===== */
-@media (max-width: 992px) {
-	/* daha küçük tabletlerde container padding azalt, logo küçült */
-	.container { padding: 0 16px; }
-	.logo img { height: 60px; }
-	.hero-content h1 { font-size: 2.6rem; }
-	.marquee-inner span { font-size: 0.95rem; }
+/* CSS: hamburger sağa yerleşsin ve mobilde görünsün */
+.hamburger {
+	display: none; /* masaüstünde gizli */
+	width: 44px;
+	height: 36px;
+	border: none;
+	background: transparent;
+	flex-direction: column;
+	justify-content: center;
+	gap: 6px;
+	cursor: pointer;
+	padding: 4px;
+	position: absolute; /* sağa sabitleme için pozisyon */
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1300;
 }
-@media (max-width: 768px) {
-	/* hamburger görünür, menu gizli */
-	.hamburger { display: flex; }
-	.nav-menu { display: none; position: absolute; top: 70px; left: 0; right:0; background:#fff; flex-direction: column; padding: 8px 0; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-	.nav-menu.active { display: flex; }
-	.logo img { height: 52px; }
-	.hero-content h1 { font-size: 2rem; }
-	.gallery-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-	.promo-banners { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 12px; }
-	.view-all .primary-btn { width: 100%; padding: 14px; }
-	/* gallery image responsive */
-	.gallery-image { height: 240px; }
-	.gallery-image img { width:100%; height:100%; object-fit:cover; display:block; }
-	/* modal single column */
-	.product-detail-container { grid-template-columns: 1fr; padding: 0; }
-	.product-detail-image { height: 60vw; }
-	.product-detail-content { padding: 1.25rem; }
-	.detail-btn { padding: 12px; font-size: 0.95rem; }
+.hamburger span {
+	display: block;
+	height: 3px;
+	background: var(--text);
+	border-radius: 2px;
+	transition: transform .22s ease, opacity .22s ease;
 }
-@media (max-width: 480px) {
-	.logo img { height: 46px; }
-	.hero-content h1 { font-size: 1.6rem; }
-	.marquee-inner span { font-size: 0.9rem; }
-	.gallery-image { height: 200px; }
-	.gallery-overlay .view-btn { padding: 10px 18px; font-size: 0.95rem; }
-}
+.hamburger.active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity: 0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
 
-/* ...existing code... */
+@media (max-width:768px) {
+	.hamburger { display: flex; }
+	.logo img { height: 52px; }
+	/* NAVBAR mobilde: Shopier tam ortada, hamburger sağda */
+	.navbar .container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		padding: 0 10px;
+	}
+	.logo {
+		margin-right: auto;
+	}
+	.nav-actions {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		justify-content: center;
+		width: auto;
+		padding: 0;
+		z-index: 1250;
+	}
+	.nav-actions .shopier-btn { margin: 0; }
+	.hamburger {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.nav-menu {
+		position: absolute;
+		top: 68px;
+		left: 0;
+		right: 0;
+		background: #fff;
+		flex-direction: column;
+		gap: 0;
+		padding: 8px 12px;
+		border-bottom: 1px solid var(--border);
+		display: none;
+		z-index: 1400;
+	}
+	.nav-menu.active { display: flex; }
+	.gallery-grid { max-width: none; margin-left: 0; grid-template-columns: 1fr; gap: 1rem; }
+}
     </style>referrerpolicy="no-referrer" />
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="marquee-inner" aria-live="polite" title="Duyuru">
-                    <span>Meve Gezer Sanat Atölyesini Keşfetin</span>
-                    <span>Eşsiz Tuvaller Burada</span>
-                   
-                </div>
+            <span>Merve Gezer Sanat Atölyesini Keşfedin</span>
+            <span>Eşsiz Tuvaller Burada</span>
+        </div>
         <div class="container">
             <a href="index.html" class="logo"><img src="img/sanatevi.jpg" alt="Logo"></a>
-            <!-- hamburger (mobil) -->
-	<button class="hamburger" aria-label="Menu" onclick="toggleMenu()" type="button">
-		<span></span><span></span><span></span>
-	</button>
+
+            <!-- Hamburger -->
+            <button class="hamburger" aria-label="Menüyü aç" aria-expanded="false" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
                 <li><a href="urunler.html" target="_blank" class="nav-link">Eserlerimi Keşfet</a></li>
@@ -1143,10 +1209,12 @@ button {
                 <li><a href="#iletisim" class="nav-link">İletişim</a></li>
                 <li><a href="muralart.html" class="nav-link" target="_blank">Muralart</a></li>
             </ul>
+
             <div class="nav-actions">
-                <a href="https://www.shopier.com/mervegezer" target="_blank" class="shopier-btn">Shopier</a>
-              
-          
+                <a href="https://www.shopier.com/mervegezer" target="_blank" rel="noopener noreferrer" class="shopier-btn">Shopier</a>
+            </div>
+
+        </div> <!-- .container kapatildi -->
     </nav>
 
     <!-- Hero Banner -->
@@ -1418,15 +1486,27 @@ button {
             }
         });
 
-        function toggleMenu(){
-	document.querySelector('.nav-menu').classList.toggle('active');
-	document.querySelector('.hamburger').classList.toggle('active');
+        /* JS: mobil menü toggle fonksiyonu */
+function toggleMenu(){
+	const btn = document.querySelector('.hamburger');
+	const menu = document.querySelector('.nav-menu');
+	if(!btn || !menu) return;
+	const isOpen = btn.classList.toggle('active');
+	menu.classList.toggle('active');
+	btn.setAttribute('aria-expanded', String(isOpen));
+	// mobilde sayfa kaydırmasını engelle (opsiyonel)
+	if(isOpen) document.body.style.overflow = 'hidden';
+	else document.body.style.overflow = '';
 }
-// kapat link tıklayınca (mobil)
+
+/* menüde linke tıklanınca kapat (mobil) */
 document.addEventListener('click', function(e){
-	if(e.target.matches('.nav-menu a') && window.innerWidth <= 768){
-		document.querySelector('.nav-menu').classList.remove('active');
-		document.querySelector('.hamburger').classList.remove('active');
+	if (window.innerWidth <= 768 && e.target.closest('.nav-menu a')) {
+		const btn = document.querySelector('.hamburger');
+		const menu = document.querySelector('.nav-menu');
+		if (menu) menu.classList.remove('active');
+		if (btn) { btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+		document.body.style.overflow = '';
 	}
 });
     </script>
