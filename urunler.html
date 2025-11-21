@@ -63,10 +63,20 @@ button {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 50px;
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--primary);
+    text-decoration: none;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
 }
 
 .nav-menu {
@@ -142,6 +152,37 @@ button {
     color: #fff;
 }
 
+/* ===== MARQUEE / KAYAN YAZI ===== */
+.marquee {
+    width: 100%;
+    background: linear-gradient(90deg, #f5f5f5 0%, #fff 50%, #f5f5f5 100%);
+    padding: 1rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee-scroll 15s linear infinite;
+    padding-left: 100%;
+    white-space: nowrap;
+}
+
+.marquee-inner span {
+    flex-shrink: 0;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* ===== HERO BANNER ===== */
 .hero-banner {
     margin-top: 70px;
@@ -190,60 +231,58 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     padding: 4rem 2rem;
-    background: #fff;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
 }
 
 .promo-item {
     padding: 3rem 2rem;
-    background: #f5f5f5;
+    background: #fff;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid var(--border);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .promo-item:hover {
-    background: var(--secondary);
     border-color: var(--accent);
-}
-
-.promo-item.featured {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(212,165,116,0.15);
 }
 
 .promo-item h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
     font-weight: 600;
+    color: var(--primary);
 }
 
 .promo-item p {
     color: var(--text-light);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 0.95rem;
-}
-
-.promo-item.featured p {
-    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
 }
 
 .promo-link {
     color: var(--accent);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.promo-item.featured .promo-link {
-    color: #fff;
+.promo-link:hover {
+    color: #c09565;
+    transform: translateX(5px);
 }
 
 /* ===== GALLERY SECTION ===== */
 .gallery {
     padding: 6rem 2rem;
-    background: #fff;
+    background: linear-gradient(135deg, #fafafa 0%, #fff 100%);
 }
 
 .gallery-header {
@@ -252,255 +291,303 @@ button {
 }
 
 .gallery-header h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     font-weight: 700;
+    letter-spacing: -1px;
 }
 
 .gallery-header p {
     color: var(--text-light);
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 300;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
     margin-bottom: 3rem;
 }
 
 .gallery-item {
     transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .gallery-image {
     position: relative;
     overflow: hidden;
-    height: 300px;
+    height: 320px;
     margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.gallery-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
+/* ===== gallery overlay (hover ile Detay İncele göster) ===== */
+.gallery-image { position: relative; /* zaten varsa güvence */ }
 
-.gallery-item:hover .gallery-image img {
-    transform: scale(1.05);
-}
-
+/* overlay varsayılan gizli, hover ile görünür */
 .gallery-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    inset: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.45);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 220ms ease, transform 220ms ease;
+    pointer-events: none;
 }
 
-.gallery-item:hover .gallery-overlay {
+/* hover veya odaklandığında overlay aktif olsun */
+.gallery-image:hover .gallery-overlay,
+.gallery-item:focus-within .gallery-overlay,
+.gallery-overlay:focus-within {
     opacity: 1;
+    pointer-events: auto;
 }
 
-.view-btn {
-    padding: 10px 25px;
+/* overlay içindeki buton (index ile uyumlu görünüm) */
+.gallery-overlay .view-btn {
     background: #fff;
-    color: var(--primary);
+    color: #111;
+    font-family: 'Caveat', 'Dancing Script', cursive;
+    font-size: 1.05rem;
+    padding: 12px 34px;
+    border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
     border: none;
-    font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
 }
 
-.view-btn:hover {
-    background: var(--accent);
-    color: #fff;
+/* hover / focus efektleri */
+.gallery-overlay .view-btn:hover,
+.gallery-overlay .view-btn:focus {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 18px 46px rgba(0,0,0,0.32);
+    outline: none;
+}
+
+/* küçük ekranlarda butonu küçült */
+@media (max-width:480px){
+    .gallery-overlay .view-btn {
+        font-size: 0.95rem;
+        padding: 10px 22px;
+    }
 }
 
 .product-info {
-    margin-bottom: 1rem;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .product-info h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
     color: var(--primary);
     font-weight: 600;
+    line-height: 1.4;
 }
 
 .product-type, .product-size {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-bottom: 0.3rem;
-}
-
-.rating {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .price-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
 }
 
 .price {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--primary);
 }
 
-.view-all {
-    text-align: center;
-}
-
-.primary-btn, .secondary-btn {
-    padding: 14px 40px;
+.view-btn {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: #fff;
     border: none;
-    border-radius: 0;
-    font-size: 0.95rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
     cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.85rem;
 }
 
-.primary-btn {
-    background: var(--primary);
+.view-btn:hover {
+    background: #c09565;
+    transform: scale(1.05);
+}
+
+/* ===== PRODUCT DETAIL MODAL ===== */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.product-modal.active {
+    display: flex;
+}
+
+.product-detail-container {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.product-detail-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+.product-detail-content h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.product-detail-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.product-detail-meta span {
+    background: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.product-detail-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.product-detail-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.detail-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.detail-btn.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a1a1a 100%);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-.primary-btn:hover {
-    background: var(--accent);
+.detail-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
 }
 
-.secondary-btn {
-    background: transparent;
+.detail-btn.secondary {
+    background: #f5f5f5;
     color: var(--primary);
     border: 2px solid var(--primary);
 }
 
-.secondary-btn:hover {
+.detail-btn.secondary:hover {
     background: var(--primary);
     color: #fff;
 }
 
-/* ===== ABOUT SECTION ===== */
-.about {
-    padding: 6rem 2rem;
-    background: #f5f5f5;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.about-text h2 {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-}
-
-.about-text p {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.8;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-
-.stat {
-    text-align: center;
-    padding-bottom: 1rem;
-}
-
-.stat strong {
-    display: block;
-    font-size: 1.8rem;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-}
-
-.stat span {
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
-.about-image {
-    overflow: hidden;
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.about-image:hover img {
-    transform: scale(1.02);
-}
-
-/* ===== FEATURES SECTION ===== */
-.features {
-    padding: 6rem 2rem;
-    background: #fff;
-}
-
-.features h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    color: var(--primary);
-    margin-bottom: 4rem;
-    font-weight: 700;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    text-align: center;
-    padding: 2rem;
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.feature-card p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    line-height: 1.6;
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== FOOTER ===== */
@@ -543,20 +630,21 @@ button {
     color: var(--accent);
 }
 
-.social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+/* Footer sosyal linkleri - sade metin stili */
+.footer-social .social-icon {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
 }
 
-.social-links a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--accent);
+.footer-social .social-icon i {
+  font-size: 2rem;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 .footer-bottom {
@@ -963,18 +1051,24 @@ button {
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation (ana sayfa ile uyumlu: marquee + logo resmi) -->
     <nav class="navbar">
+        <div class="marquee">
+            <div class="marquee-inner" aria-live="polite" title="Duyuru">
+                <span>Merve Gezer Sanat Atölyesini Keşfedin</span>
+                <span>Yeni eserler ve baskılar burada</span>
+                <span>Özel mural projeleri</span>
+            </div>
+        </div>
         <div class="container">
-            <div class="logo">SANAT ATÖLYESİ</div>
+            <a href="index.html" class="logo"><img src="img/sanatevi.jpg" alt="Sanat Evi Logo"></a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
-                <li><a href="urunler.html" class="nav-link">Eserlerimi Keşfet</a></li>
-                <li><a href="#hak" class="nav-link">Sanatçı Hakkında</a></li>
                 <li><a href="#iletisim" class="nav-link">İletişim</a></li>
+                <li><a href="muralart" class="nav-link">Muralart</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="https://www.shopier.com/" target="_blank" class="shopier-btn">Shopier</a>
+                <a href="https://www.shopier.com/mervegezer" target="_blank" class="shopier-btn">Shopier</a>
             </div>
         </div>
     </nav>
@@ -983,33 +1077,220 @@ button {
     <section class="gallery">
         <div class="container">
             <div class="gallery-header">
-                <h2>Galerim</h2>
-                <p>Seçkin eserlerden oluşan koleksiyonu keşfedin.</p>
+                <h2>Sanat Eserlerim</h2>
+                <p>Renklerin ve Dokuların Buluşması</p>
             </div>
 
             <div class="gallery-grid">
-                <!-- Product 1 -->
-                <div class="gallery-item">
-                    <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1000&h=800&fit=crop" alt="Eser 1">
-                        <div class="gallery-overlay">
-                            <button class="view-btn">Detaylı İncele</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>"Güneşin Yükselişi" - Premium Baskı</h3>
-                        <p class="product-type">Orijinal Dijital Sanat</p>
-                        <p class="product-size">60x80 cm |</p>
-                        <div class="price-section">
-                            <span class="price">₺2.500</span>
-                            <button class="view-btn">Satın Al</button>
-                        </div>
-                    </div>
-                </div>
+	<!-- Product 1 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://www.instagram.com/hlysby/p/DQorIfwCD-FJJpPDR3vrNKmB0WrCe-pIosdbug0/" alt="Eser 1">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('Güneşin Yükselişi', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1200&h=1200&fit=crop', '₺2.500', 'Orijinal Dijital Sanat', '60x80 cm', 'Güneşin yükselişi, umudun ve yenilemenin sembolü olarak bu eserle canlandırılmıştır. Canlı renkler ve dinamik formlar, doğanın güzelliğini ve hayatın kesintisiz hareketini yansıtır.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"Güneşin Yükselişi" - Premium Baskı</h3>
+			<p class="product-type">Orijinal Dijital Sanat</p>
+			<p class="product-size">60x80 cm</p>
+			<div class="price-section">
+				<span class="price">₺2.500</span>
+				<button class="view-btn" onclick="openProductModal('Güneşin Yükselişi', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1200&h=1200&fit=crop', '₺2.500', 'Orijinal Dijital Sanat', '60x80 cm', 'Güneşin yükselişi, umudun ve yenilemenin sembolü olarak bu eserle canlandırılmıştır.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
 
-                <!-- (Diğer ürünleri buraya ekleyebilirsiniz) -->
+	<!-- Product 2 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 2">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('Sessiz Anlama', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺3.200', 'Akrilik Boyama', '70x100 cm', 'Bu eserde sessizliğin derinliği ve içsel huzur aranmıştır. Yumuşak renkler ve soyut formlar, göze görünmeyen duyguları görünür kılar.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"Sessiz Anlama" - Canvas Baskı</h3>
+			<p class="product-type">Akrilik</p>
+			<p class="product-size">70x100 cm</p>
+			<div class="price-section">
+				<span class="price">₺3.200</span>
+				<button class="view-btn" onclick="openProductModal('Sessiz Anlama', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺3.200', 'Akrilik Boyama', '70x100 cm', 'Satın almak için iletişime geçin.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product 3 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=500&fit=crop" alt="Eser 3">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('Rüya Görenlerin Sanatı', 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=1200&fit=crop', '₺5.800', 'Dijital Kolaj', '50x70 cm', 'Rüyalar ve hayal dünyasının sınırlarını araştıran sürreal bir çalışma.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"Rüya Görenlerin Sanatı" - Sınırlı Baskı</h3>
+			<p class="product-type">Dijital Kolaj</p>
+			<p class="product-size">50x70 cm</p>
+			<div class="price-section">
+				<span class="price">₺5.800</span>
+				<button class="view-btn" onclick="openProductModal('Rüya Görenlerin Sanatı', 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=1200&fit=crop', '₺5.800', 'Dijital Kolaj', '50x70 cm', 'Satın almak için iletişime geçin.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product 4 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 4">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('Doğanın Sihri', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺1.800', 'Su Rengisi', '40x60 cm', 'Organik formlar ve hafif su rengisi efekti.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"Doğanın Sihri" - Standard Baskı</h3>
+			<p class="product-type">Su Rengisi</p>
+			<p class="product-size">40x60 cm</p>
+			<div class="price-section">
+				<span class="price">₺1.800</span>
+				<button class="view-btn" onclick="openProductModal('Doğanın Sihri', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺1.800', 'Su Rengisi', '40x60 cm', 'Satın almak için iletişime geçin.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product 5 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=500&h=500&fit=crop" alt="Eser 5">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('İç Huzur', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1200&h=1200&fit=crop', '₺4.500', 'Tuval Üzerine Yağlıboya', '80x120 cm', 'Derin katmanlar ve zengin dokularla ifade edilen bir çalışma.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"İç Huzur" - Premium Canvas</h3>
+			<p class="product-type">Tuval Üzerine Yağlıboya</p>
+			<p class="product-size">80x120 cm</p>
+			<div class="price-section">
+				<span class="price">₺4.500</span>
+				<button class="view-btn" onclick="openProductModal('İç Huzur', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1200&h=1200&fit=crop', '₺4.500', 'Tuval Üzerine Yağlıboya', '80x120 cm', 'Satın almak için iletişime geçin.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product 6 -->
+	<div class="gallery-item">
+		<div class="gallery-image">
+			<img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=500&h=500&fit=crop" alt="Eser 6">
+			<div class="gallery-overlay">
+				<button class="view-btn" onclick="openProductModal('Işığın Dansı', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺6.200', 'Dijital Baskı', '70x100 cm', 'Işığın dinamik hareketi ve renkli salınımların harmanı.')">Detay İncele</button>
+			</div>
+		</div>
+		<div class="product-info">
+			<h3>"Işığın Dansı" - Dekoratif</h3>
+			<p class="product-type">Dijital Baskı</p>
+			<p class="product-size">70x100 cm</p>
+			<div class="price-section">
+				<span class="price">₺6.200</span>
+				<button class="view-btn" onclick="openProductModal('Işığın Dansı', 'https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop', '₺6.200', 'Dijital Baskı', '70x100 cm', 'Satın almak için iletişime geçin.')">Satın Al</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+            <div class="view-all">
+                <button class="primary-btn">Daha Fazla Eser Gözat</button>
             </div>
         </div>
     </section>
 
+    <!-- Promo Banners (ana sayfa ile uyumlu) -->
+    <div class="promo-banners">
+        <div class="promo-item first-child">
+            <h3>🖼️ Muralart Eserlerim</h3>
+            <p>Duvarlarınız için özel tasarımlar</p>
+            <a href="muralart.html" class="promo-link">Muralart Talep Et →</a>
+        </div>
+    </div>
+
+   
+
+    <!-- Footer (ana sayfa ile uyumlu) -->
+    <footer class="footer" id="iletisim">
+        <div class="container">
+            <div class="footer-contact" style="text-align:center; padding: 2rem 0; color: #fff; font-family: Arial, sans-serif;">
+                <h2 style="font-family: Arial, sans-serif;">İletişim</h2>
+                <p style="font-family: Arial, sans-serif;">📧 info@studio.com</p>
+                <p style="font-family: Arial, sans-serif;">📍 Evka 3 Bornava İzmir, Türkiye</p>
+            </div>
+            <div class="footer-social" style="text-align:center; margin-bottom: 1.5rem;">
+                <a href="https://www.instagram.com/gezermerve.art?igsh=MXVwdTQ0bndneWp6Zw==" target="_blank" class="social-icon" title="Instagram" style="margin:0 10px;font-size:2rem;color:#fff;display:inline-block;">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://youtube.com/@gezermerveart?si=wJwJpPr-iCMgn-e2" target="_blank" class="social-icon" title="YouTube" style="margin:0 10px;font-size:2rem;color:#fff;display:inline-block;"  >
+                
+               
+                    <i class="fa-brands fa-youtube"></i> YouTube
+                </a>
+            </div>
+            <div class="footer-bottom" style="text-align:center; padding: 1rem 0; color: #fff; font-family: Arial, sans-serif;">
+                <p>&copy; 2025 STUDIO. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="product-detail-container">
+            <img id="modalImage" src="" alt="Ürün" class="product-detail-image">
+            <div class="product-detail-content">
+                <button class="close-modal" onclick="closeProductModal()">&times;</button>
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <div class="product-detail-meta">
+                        <span id="modalType"></span>
+                        <span id="modalSize"></span>
+                    </div>
+                    <div class="product-detail-price" id="modalPrice"></div>
+                    <p class="product-detail-description" id="modalDescription"></p>
+                </div>
+                <div class="product-detail-actions">
+                    <button class="detail-btn primary" onclick="addToCart()">Satın Al</button>
+                    <button class="detail-btn secondary" onclick="closeProductModal()">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function openProductModal(title, image, price, type, size, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalType').textContent = type;
+            document.getElementById('modalSize').textContent = size;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        {
+            // değiştirildi: alert kaldırıldı, sadece modal kapatılıyor
+            function addToCart() {
+                // burada sepete ekleme veya satın alma işlemi eklenecek
+                closeProductModal();
+            }
+        }
+
+        // Modal dışında tıklanırsa kapat
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductModal();
+            }
+        });
+    </script>
 </body>
+</html>
