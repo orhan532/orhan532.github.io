@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muralart - Merve Gezer Sanat Evi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #000;
+    --secondary: #f5f5f5;
+    --accent: #d4a574;
+    --text: #333;
+    --text-light: #666;
+    --border: #e0e0e0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Dancing Script', 'Caveat', cursive;
+    background: #fff;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+.marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee-scroll 15s linear infinite;
+    padding-left: 100%;
+    white-space: nowrap;
+}
+
+.marquee-inner span {
+    flex-shrink: 0;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    flex: 1;
+    margin-left: 3rem;
+}
+
+.nav-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: static;
+}
+
+.hamburger {
+    display: none;
+    width: 44px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 4px;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1500;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .22s ease;
+}
+
+.hamburger.active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity: 0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+.shopier-btn {
+    display: inline-block;
+    background: #5c4dff;
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.shopier-btn:hover {
+    background: #3a2db3;
+    color: #fff;
+}
+
+/* ===== HERO BANNER ===== */
+.mural-hero {
+    margin-top: 70px;
+    padding: 6rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+}
+
+.mural-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    letter-spacing: -1px;
+    font-weight: 700;
+}
+
+.mural-hero p {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== MURAL GALLERY ===== */
+.mural-gallery {
+    padding: 6rem 2rem;
+    background: #fff;
+}
+
+.mural-gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.mural-gallery-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.mural-gallery-header p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.mural-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.mural-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mural-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.mural-image {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.mural-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.mural-card:hover .mural-image img {
+    transform: scale(1.1);
+}
+
+.mural-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mural-card:hover .mural-overlay {
+    opacity: 1;
+}
+
+.view-detail-btn {
+    padding: 12px 30px;
+    background: #fff;
+    color: var(--primary);
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.view-detail-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.mural-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+.mural-info h3 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.mural-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.mural-location i {
+    color: var(--accent);
+}
+
+.mural-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.mural-spec {
+    background: var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.mural-description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-top: 0.5rem;
+}
+
+.mural-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    flex: 1;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.secondary-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ===== MURAL DETAIL MODAL ===== */
+.mural-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.mural-modal.active {
+    display: flex;
+}
+
+.mural-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mural-modal-image {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+}
+
+.mural-modal-info {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.mural-modal-info h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.mural-modal-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mural-modal-location i {
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.mural-modal-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.mural-modal-spec {
+    background: var(--secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.mural-modal-description {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.mural-modal-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    padding: 4rem 2rem 2rem;
+    background: var(--primary);
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.footer-contact {
+    text-align: center;
+    padding: 2rem 0;
+    color: #fff;
+}
+
+.footer-contact h2 {
+    margin-bottom: 1rem;
+}
+
+.footer-social {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social .social-icon {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.95);
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.footer-social .social-icon i {
+    font-size: 2rem;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar .container {
+        padding: 0 12px;
+    }
+    
+    .logo img {
+        height: 52px;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 0 12px;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 260ms ease;
+        z-index: 1400;
+    }
+    
+    .nav-menu.active {
+        max-height: 520px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    
+    .nav-link {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        display: block;
+    }
+    
+    .nav-actions {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1250;
+    }
+    
+    .mural-hero {
+        padding: 3rem 1rem;
+    }
+    
+    .mural-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .mural-hero p {
+        font-size: 1rem;
+    }
+    
+    .mural-gallery {
+        padding: 4rem 1rem;
+    }
+    
+    .mural-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .mural-image {
+        height: 300px;
+    }
+    
+    .mural-modal-content {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        margin: 1rem;
+    }
+    
+    .mural-modal-image {
+        min-height: 300px;
+    }
+    
+    .mural-modal-info {
+        padding: 2rem 1.5rem;
+    }
+    
+    .mural-modal-actions {
+        flex-direction: column;
+    }
+    
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mural-hero h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo img {
+        height: 44px;
+    }
+    
+    .mural-gallery-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .mural-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .mural-modal-info h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="marquee-inner" aria-live="polite" title="Duyuru">
+            <span>Merve Gezer Sanat Atölyesini Keşfedin</span>
+            <span>Eşsiz Duvar Resimleri Burada</span>
+        </div>
+        <div class="container">
+            <a href="index.html" class="logo"><img src="img/sanatevi.jpg" alt="Logo"></a>
+
+            <button class="hamburger" aria-label="Menüyü aç" aria-expanded="false" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="urunler.html" target="_blank" class="nav-link">Eserlerimi Keşfet</a></li>   
+                <li><a href="#iletisim" class="nav-link">İletişim</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://www.shopier.com/mervegezer" target="_blank" rel="noopener noreferrer" class="shopier-btn">Shopier</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="mural-hero">
+        <div class="hero-content">
+            <h1>Muralart</h1>
+            <p>Duvarları sanata dönüştürüyoruz. Her proje, mekanın ruhunu yansıtan özgün bir eserdir.</p>
+        </div>
+    </section>
+
+    <!-- Mural Gallery -->
+    <section class="mural-gallery">
+        <div class="container">
+            <div class="mural-gallery-header">
+                <h2>Mural Projelerimiz</h2>
+                <p>Her biri özenle tasarlanmış ve uygulanmış duvar resimleri</p>
+            </div>
+
+            <div class="mural-grid">
+                <!-- Mural 1 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=1000&fit=crop" alt="Modern Şehir Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('modern-sehir', 'Modern Şehir', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1500&fit=crop', 'İzmir, Bornova', '15m x 8m', 'Akrilik Boya', 'Modern şehir yaşamını yansıtan dinamik bir kompozisyon. Canlı renkler ve geometrik formlarla şehrin enerjisini duvara taşıyor.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Modern Şehir</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Bornova</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">15m x 8m</span>
+                            <span class="mural-spec">Akrilik</span>
+                        </div>
+                        <p class="mural-description">Modern şehir yaşamını yansıtan dinamik bir kompozisyon. Canlı renkler ve geometrik formlarla şehrin enerjisini duvara taşıyor.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('modern-sehir', 'Modern Şehir', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1500&fit=crop', 'İzmir, Bornova', '15m x 8m', 'Akrilik Boya', 'Modern şehir yaşamını yansıtan dinamik bir kompozisyon. Canlı renkler ve geometrik formlarla şehrin enerjisini duvara taşıyor.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mural 2 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=1000&fit=crop" alt="Doğa Teması Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('doga-temasi', 'Doğa Teması', 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=1500&fit=crop', 'İzmir, Karşıyaka', '12m x 6m', 'Spray Boya', 'Doğanın büyüleyici güzelliğini yansıtan organik formlar. Yapraklar, çiçekler ve doğal dokularla huzurlu bir atmosfer yaratıyor.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Doğa Teması</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Karşıyaka</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">12m x 6m</span>
+                            <span class="mural-spec">Spray</span>
+                        </div>
+                        <p class="mural-description">Doğanın büyüleyici güzelliğini yansıtan organik formlar. Yapraklar, çiçekler ve doğal dokularla huzurlu bir atmosfer yaratıyor.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('doga-temasi', 'Doğa Teması', 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=1500&fit=crop', 'İzmir, Karşıyaka', '12m x 6m', 'Spray Boya', 'Doğanın büyüleyici güzelliğini yansıtan organik formlar. Yapraklar, çiçekler ve doğal dokularla huzurlu bir atmosfer yaratıyor.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mural 3 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&h=1000&fit=crop" alt="Soyut Sanat Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('soyut-sanat', 'Soyut Sanat', 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1200&h=1500&fit=crop', 'İzmir, Konak', '10m x 5m', 'Akrilik & Spray', 'Soyut formlar ve renk geçişleriyle oluşturulan çağdaş bir eser. Her bakışta farklı anlamlar keşfedilebilir.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Soyut Sanat</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Konak</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">10m x 5m</span>
+                            <span class="mural-spec">Karışık</span>
+                        </div>
+                        <p class="mural-description">Soyut formlar ve renk geçişleriyle oluşturulan çağdaş bir eser. Her bakışta farklı anlamlar keşfedilebilir.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('soyut-sanat', 'Soyut Sanat', 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1200&h=1500&fit=crop', 'İzmir, Konak', '10m x 5m', 'Akrilik & Spray', 'Soyut formlar ve renk geçişleriyle oluşturulan çağdaş bir eser. Her bakışta farklı anlamlar keşfedilebilir.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mural 4 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&h=1000&fit=crop" alt="Portre Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('portre-mural', 'Portre Muralı', 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&h=1500&fit=crop', 'İzmir, Bostanlı', '8m x 6m', 'Akrilik Boya', 'Gerçekçi portre tekniğiyle oluşturulan etkileyici bir eser. İnsan yüzünün derinliğini ve duygusunu yansıtıyor.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Portre Muralı</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Bostanlı</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">8m x 6m</span>
+                            <span class="mural-spec">Akrilik</span>
+                        </div>
+                        <p class="mural-description">Gerçekçi portre tekniğiyle oluşturulan etkileyici bir eser. İnsan yüzünün derinliğini ve duygusunu yansıtıyor.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('portre-mural', 'Portre Muralı', 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&h=1500&fit=crop', 'İzmir, Bostanlı', '8m x 6m', 'Akrilik Boya', 'Gerçekçi portre tekniğiyle oluşturulan etkileyici bir eser. İnsan yüzünün derinliğini ve duygusunu yansıtıyor.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mural 5 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&h=1000&fit=crop" alt="Geometrik Desen Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('geometrik-desen', 'Geometrik Desen', 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1200&h=1500&fit=crop', 'İzmir, Alsancak', '20m x 10m', 'Spray Boya', 'Geometrik formlar ve simetrik desenlerle oluşturulan modern bir kompozisyon. Mimari yapılarla uyumlu tasarım.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Geometrik Desen</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Alsancak</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">20m x 10m</span>
+                            <span class="mural-spec">Spray</span>
+                        </div>
+                        <p class="mural-description">Geometrik formlar ve simetrik desenlerle oluşturulan modern bir kompozisyon. Mimari yapılarla uyumlu tasarım.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('geometrik-desen', 'Geometrik Desen', 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1200&h=1500&fit=crop', 'İzmir, Alsancak', '20m x 10m', 'Spray Boya', 'Geometrik formlar ve simetrik desenlerle oluşturulan modern bir kompozisyon. Mimari yapılarla uyumlu tasarım.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mural 6 -->
+                <div class="mural-card">
+                    <div class="mural-image">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=1000&fit=crop" alt="Kültürel Miras Muralı">
+                        <div class="mural-overlay">
+                            <button class="view-detail-btn" onclick="openMuralModal('kulturel-miras', 'Kültürel Miras', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&h=1500&fit=crop', 'İzmir, Kemeraltı', '14m x 7m', 'Akrilik Boya', 'Bölgenin kültürel mirasını yansıtan geleneksel motifler ve modern yorumlarla harmanlanmış özel bir eser.')">Detayları Gör</button>
+                        </div>
+                    </div>
+                    <div class="mural-info">
+                        <h3>Kültürel Miras</h3>
+                        <div class="mural-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İzmir, Kemeraltı</span>
+                        </div>
+                        <div class="mural-specs">
+                            <span class="mural-spec">14m x 7m</span>
+                            <span class="mural-spec">Akrilik</span>
+                        </div>
+                        <p class="mural-description">Bölgenin kültürel mirasını yansıtan geleneksel motifler ve modern yorumlarla harmanlanmış özel bir eser.</p>
+                        <div class="mural-actions">
+                            <button class="primary-btn" onclick="openMuralModal('kulturel-miras', 'Kültürel Miras', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&h=1500&fit=crop', 'İzmir, Kemeraltı', '14m x 7m', 'Akrilik Boya', 'Bölgenin kültürel mirasını yansıtan geleneksel motifler ve modern yorumlarla harmanlanmış özel bir eser.')">Detaylı İncele</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="iletisim">
+        <div class="container">
+            <div class="footer-contact">
+                <h2>İletişim</h2>
+                <p>📧 info@studio.com</p>
+                <p>📍 Evka 3 Bornova İzmir, Türkiye</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/gezermerve.art" target="_blank" class="social-icon" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://youtube.com/@gezermerveart" target="_blank" class="social-icon" title="Youtube">
+                    <i class="fa-brands fa-youtube"></i> Youtube
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 STUDIO. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mural Detail Modal -->
+    <div class="mural-modal" id="muralModal">
+        <div class="mural-modal-content">
+            <img id="modalMuralImage" src="" alt="Mural" class="mural-modal-image">
+            <div class="mural-modal-info">
+                <button class="close-modal" onclick="closeMuralModal()">&times;</button>
+                <div>
+                    <h2 id="modalMuralTitle"></h2>
+                    <div class="mural-modal-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="modalMuralLocation"></span>
+                    </div>
+                    <div class="mural-modal-specs" id="modalMuralSpecs"></div>
+                    <p class="mural-modal-description" id="modalMuralDescription"></p>
+                </div>
+                <div class="mural-modal-actions">
+                    <button class="primary-btn" onclick="contactForMural()">Proje İçin İletişime Geç</button>
+                    <button class="secondary-btn" onclick="closeMuralModal()">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SHOPIER_URL = 'https://www.shopier.com/mervegezer';
+
+        // Mural modal functions
+        function openMuralModal(id, title, image, location, size, technique, description) {
+            document.getElementById('modalMuralTitle').textContent = title;
+            document.getElementById('modalMuralImage').src = image;
+            document.getElementById('modalMuralImage').alt = title;
+            document.getElementById('modalMuralLocation').textContent = location;
+            
+            const specsContainer = document.getElementById('modalMuralSpecs');
+            specsContainer.innerHTML = `
+                <span class="mural-modal-spec">${size}</span>
+                <span class="mural-modal-spec">${technique}</span>
+            `;
+            
+            document.getElementById('modalMuralDescription').textContent = description;
+            document.getElementById('muralModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMuralModal() {
+            document.getElementById('muralModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function contactForMural() {
+            window.open(SHOPIER_URL, '_blank', 'noopener');
+        }
+
+        // Close modal on background click
+        document.getElementById('muralModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMuralModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                closeMuralModal();
+            }
+        });
+
+        // Mobil menü toggle
+        function toggleMenu() {
+            const btn = document.querySelector('.hamburger');
+            const menu = document.querySelector('.nav-menu');
+            if (!btn || !menu) return;
+            const isOpen = btn.classList.toggle('active');
+            menu.classList.toggle('active');
+            btn.setAttribute('aria-expanded', String(isOpen));
+            if (isOpen) document.body.style.overflow = 'hidden';
+            else document.body.style.overflow = '';
+        }
+
+        // Menü linkine tıklanırsa kapat (mobil)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 && e.target.closest('.nav-menu a')) {
+                const btn = document.querySelector('.hamburger');
+                const menu = document.querySelector('.nav-menu');
+                if (menu) menu.classList.remove('active');
+                if (btn) {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ESC ile mobil menüyü kapat
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                const btn = document.querySelector('.hamburger');
+                const menu = document.querySelector('.nav-menu');
+                if (menu && menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    if (btn) {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-expanded', 'false');
+                    }
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+
+        // Pencere yeniden boyutlandığında (masaüstüne dönüldüğünde) menüyü kapat
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const btn = document.querySelector('.hamburger');
+                const menu = document.querySelector('.nav-menu');
+                if (menu) menu.classList.remove('active');
+                if (btn) {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>
