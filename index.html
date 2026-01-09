@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merve Gezer Sanat Evi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #000;
+    --secondary: #f5f5f5;
+    --accent: #d4a574;
+    --text: #333;
+    --text-light: #666;
+    --border: #e0e0e0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Dancing Script', 'Caveat', cursive;
+    background: #fff;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; /* hamburger için referans */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+/* ===== MARQUEE / KAYAN YAZI ===== */
+.marquee {
+    width: 100%;
+    background: linear-gradient(90deg, #f5f5f5 0%, #fff 50%, #f5f5f5 100%);
+    padding: 1rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee-scroll 15s linear infinite;
+    padding-left: 100%;
+    white-space: nowrap;
+}
+
+.marquee-inner span {
+    flex-shrink: 0;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .marquee {
+        padding: 0.75rem 0;
+    }
+    
+    .marquee-inner span {
+        font-size: 0.9rem;
+    }
+}
+/* Menü sağa yasla */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    flex: 1;
+    margin-left: 3rem; /* masaüstü: eski konumuna geri */
+}
+
+.nav-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: static; /* masaüstü: statik, satır içi davranış */
+    transform: none;
+    left: auto;
+    top: auto;
+    z-index: auto;
+}
+
+.search-btn, .account-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.search-btn:hover, .account-btn:hover {
+    opacity: 0.7;
+}
+
+.hamburger {
+    display: none;
+    width: 44px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 4px;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1500;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .22s ease;
+}
+
+/* aktif (çarpı) görünümü */
+.hamburger.active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity: 0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+.shopier-btn {
+    display: inline-block;
+    background: #5c4dff;
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.shopier-btn:hover {
+    background: #3a2db3;
+    color: #fff;
+}
+
+/* ===== HERO BANNER ===== */
+.hero-banner {
+    margin-top: 70px;
+    padding: 6rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    letter-spacing: -1px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.cta-button {
+    padding: 14px 40px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: var(--accent);
+}
+
+/* ===== PROMO BANNERS ===== */
+.promo-banners {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 4rem 2rem;
+    background: #fff;
+}
+
+.promo-item {
+    padding: 3rem 2rem;
+    background: #f5f5f5;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border);
+}
+
+.promo-item:hover {
+    background: var(--secondary);
+    border-color: var(--accent);
+}
+
+.promo-item.featured {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.promo-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.promo-item p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.promo-item.featured p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.promo-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.promo-item.featured .promo-link {
+    color: #fff;
+}
+
+/* ===== GALLERY SECTION ===== */
+.gallery {
+    padding: 6rem 2rem;
+    background: #fff;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.gallery-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.gallery-header p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.gallery-item {
+    transition: all 0.3s ease;
+}
+
+.gallery-image {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    margin-bottom: 1.5rem;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.view-btn {
+    padding: 10px 25px;
+    background: #fff;
+    color: var(--primary);
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.product-info {
+    margin-bottom: 1rem;
+}
+
+.product-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.product-type, .product-size {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.rating {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.view-all {
+    text-align: center;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background: var(--accent);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.secondary-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about {
+    padding: 6rem 2rem;
+    background: #f5f5f5;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.about-text p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.stat span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.about-image {
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.02);
+}
+
+/* ===== FEATURES SECTION ===== */
+.features {
+    padding: 6rem 2rem;
+    background: #fff;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 4rem;
+    font-weight: 700;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    padding: 4rem 2rem 2rem;
+    background: var(--primary);
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--accent);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+.footer-social .social-icon {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+.footer-social .social-icon i {
+  font-size: 2rem;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ===== PAYMENT MODAL ===== */
+.payment-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.payment-modal.active {
+    display: flex;
+}
+
+.payment-container {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.payment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: #fff;
+}
+
+.payment-header h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.close-payment {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.close-payment:hover {
+    color: var(--primary);
+}
+
+.payment-content {
+    padding: 2rem;
+}
+
+.order-summary {
+    background: var(--secondary);
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+}
+
+.order-summary h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.summary-items {
+    margin-bottom: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 2px solid var(--border);
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-section h3 {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.payment-form input,
+.payment-form textarea {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.payment-form input:focus,
+.payment-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.payment-methods label {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-methods label:hover {
+    border-color: var(--accent);
+    background: rgba(212, 165, 116, 0.05);
+}
+
+.payment-methods input[type="radio"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.payment-methods span {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.submit-payment {
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.submit-payment:hover {
+    background: var(--accent);
+}
+
+.submit-payment:active {
+    transform: scale(0.98);
+}
+
+/* ===== SUCCESS MODAL ===== */
+.success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2001;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-modal.active {
+    display: flex;
+}
+
+.success-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 3rem 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #4CAF50;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1.5rem;
+    animation: scaleIn .0s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.success-container h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-container p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.success-details {
+    background: var(--secondary);
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.success-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.success-detail-item:last-child {
+    border-bottom: none;
+}
+
+.success-detail-item span:first-child {
+    color: #666;
+    font-weight: 500;
+}
+
+.success-detail-item span:last-child {
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+}
+
+.success-button {
+    padding: 12px 30px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.success-button:hover {
+    background: var(--accent);
+}
+
+/* ===== PRODUCT DETAIL MODAL ===== */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.product-modal.active {
+    display: flex;
+}
+
+.product-detail-container {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.product-detail-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+.product-detail-content h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.product-detail-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.product-detail-meta span {
+    background: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.product-detail-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.product-detail-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.detail-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.detail-btn.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a1a1a 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.detail-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.detail-btn.secondary {
+    background: #f5f5f5;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.detail-btn.secondary:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* EK: Mobil uyumluluk iyileştirmeleri (güncellendi) */
+@media (max-width: 768px) {
+	.navbar .container { padding: 0 12px; }
+	.logo img { height: 52px; }
+	.hamburger { display: flex; }
+
+	/* nav-menu: display:none yerine max-height ile aç/kapa (daha kararlı) */
+	.nav-menu {
+		display:flex;
+		flex-direction: column;
+		position: absolute;
+		top: 68px;
+		left: 0;
+		right: 0;
+		background: #fff;
+		padding: 0 12px;
+		overflow: hidden;
+		max-height: 0;
+		transition: max-height 260ms ease;
+		z-index: 1400;
+	}
+	.nav-menu.active { max-height: 520px; padding-top:8px; padding-bottom:8px; }
+
+	.nav-link { padding: 10px 12px; border-bottom: 1px solid var(--border); display:block; }
+	.nav-actions {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1250;
+	}
+
+
+}
+
+
+/* ===== PASTEL & DALGALI GÖKKUŞAĞI ===== */
+.paint-intro {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: introFadeOut 2.4s ease 9.5s forwards;
+}
+
+/* 🌈 GÖKKUŞAĞI */
+.rainbow-arc {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  display: block;
+}
+.rainbow-arc path {
+  vector-effect: non-scaling-stroke;
+}
+
+
+.rainbow-arc path {
+  fill: none;
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: drawLeftRight 5s cubic-bezier(.25,.8,.25,1) forwards;
+}
+
+/* Renkler soldan sağa, yavaş */
+.rainbow-arc path:nth-child(1) { animation-delay: 0s; }
+.rainbow-arc path:nth-child(2) { animation-delay: .4s; }
+.rainbow-arc path:nth-child(3) { animation-delay: .8s; }
+.rainbow-arc path:nth-child(4) { animation-delay: 1.2s; }
+.rainbow-arc path:nth-child(5) { animation-delay: 1.6s; }
+.rainbow-arc path:nth-child(6) { animation-delay: 2s; }
+
+/* ✨ YAZI */
+.intro-title {
+  font-size: 5rem;
+  letter-spacing: 8px;
+  color: #222;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: titleFade 2.2s ease forwards;
+  animation-delay: 4.8s;
+}
+
+/* ANİMASYONLAR */
+@keyframes drawLeftRight {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes titleFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌊 DALGALANMA */
+@keyframes waveFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes introFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* MOBİL */
+@media (max-width: 600px) {
+  .rainbow-arc path {
+    stroke-width: 16;
+  }
+  .intro-title {
+    font-size: 2.8rem;
+    letter-spacing: 4px;
+  }
+}
+
+
+
+/* end of CSS rules (kept as-is) */
+</style>
+</head>
+
+
+
+<body>
+<!-- PASTEL GÖKKUŞAĞI AÇILIŞ -->
+<div class="paint-intro">
+  <svg class="rainbow-arc" viewBox="0 0 1400 700">
+    <path d="M100 560 A600 600 0 0 1 1300 560" stroke="#f4a3a3"/>
+    <path d="M140 560 A560 560 0 0 1 1260 560" stroke="#f7c59f"/>
+    <path d="M180 560 A520 520 0 0 1 1220 560" stroke="#f9e79f"/>
+    <path d="M220 560 A480 480 0 0 1 1180 560" stroke="#a8dadc"/>
+    <path d="M260 560 A440 440 0 0 1 1140 560" stroke="#b5c7f2"/>
+    <path d="M300 560 A400 400 0 0 1 1100 560" stroke="#d7bde2"/>
+  </svg>
+
+  <h1 class="intro-title">Merve Gezer</h1>
+</div>
+
+
+
+
+
+
+
+	<!-- Navigation -->
+	<nav class="navbar">
+		<div class="marquee-inner" aria-live="polite" title="Duyuru">
+			<span>Merve Gezer Sanat Atölyesini Keşfedin</span>
+			<span>Eşsiz Tuvaller Burada</span>
+		</div>
+		<div class="container">
+			<a href="index.html" class="logo"><img src="img/sanatevi.jpg" alt="Logo"></a>
+
+			<!-- Hamburger -->
+			<button class="hamburger" aria-label="Menüyü aç" aria-expanded="false" onclick="toggleMenu()">
+				<span></span><span></span><span></span>
+			</button>
+
+			<ul class="nav-menu">
+				<li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+				<li><a href="urunler.html" target="_blank" class="nav-link">Eserlerimi Keşfet</a></li>
+				<li><a href="#hak" class="nav-link">Sanatçı Hakkında</a></li>
+				<li><a href="#iletisim" class="nav-link">İletişim</a></li>
+				<li><a href="muralart.html" class="nav-link" target="_blank">Muralart</a></li>
+			</ul>
+
+			<div class="nav-actions">
+				<a href="https://www.shopier.com/mervegezer" target="_blank" rel="noopener noreferrer" class="shopier-btn">Shopier</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Hero Banner -->
+	<section class="hero-banner">
+		<div class="hero-content">
+			<h1>Merve Gezer</h1>
+			<p>Sanat Atölyesi</p>
+			<a href="urunler.html" target="_blank" class="cta-button">Eserlerimi Keşfet</a>
+		</div>
+	</section>
+
+	<!-- Promotional Banners -->
+	<div class="promo-banners">
+		<div class="promo-item">
+			<h3>Tuvaller</h3>
+			<p>Kaliteli Çizimler</p>
+			<a href="urunler.html" target="_blank" class="promo-link">Keşfet →</a>
+		</div>
+		<div class="promo-item featured">
+			<h3>Printer Baskı</h3>
+			<p>Kaliteli Baskı</p>
+			<a href="urunler.html"  target="_blank" class="promo-link">Şimdi Keşfet →</a>
+		</div>
+		<div class="promo-item">
+			<h3>Muralart</h3>
+			<p>Kaliteli Duvar Resimleri</p>
+			<a href="muralart.html"  target="_blank" class="promo-link">Şimdi Keşfet →</a>
+		</div>
+	</div>
+
+	<!-- Gallery Section (örnek birkaç ürün) -->
+	<section class="gallery">
+		<div class="container">
+			<div class="gallery-header">
+				<h2>Sanat Eserlerim</h2>
+				<p>Renklerin ve Dokuların Buluşması</p>
+			</div>
+
+			<div class="gallery-grid">
+				<div class="gallery-item">
+					<div class="gallery-image">
+						<img src="https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=800&h=800&fit=crop" alt="Eser 1">
+						<div class="gallery-overlay">
+							<button class="view-btn" onclick="openProductModal('Güneşin Yükselişi', 'https://images.unsplash.com/photo-1561214115-6d2f1b0609fa?w=1200&h=1200&fit=crop','₺2.500','Orijinal Dijital','60x80','Canlı renklerle...')">Detay İncele</button>
+						</div>
+					</div>
+					<div class="product-info">
+						<h3>"Güneşin Yükselişi" - Premium Baskı</h3>
+						<p class="product-type">Orijinal Dijital Sanat</p>
+						<div class="price-section">
+							<span class="price">₺2.500</span>
+							<button class="primary-btn" onclick="addToCart('Güneşin Yükselişi',2500)">Satın Al</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- örnek ürün 2 -->
+				<div class="gallery-item">
+					<div class="gallery-image">
+						<img src="https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=800&h=800&fit=crop" alt="Eser 2">
+						<div class="gallery-overlay">
+							<button class="view-btn" onclick="openProductModal('Sessiz Anlama','https://images.unsplash.com/photo-1578321272176-f881a42b0c18?w=1200&h=1200&fit=crop','₺3.200','Akrilik','70x100','Derinlik...')">Detay İncele</button>
+						</div>
+					</div>
+					<div class="product-info">
+						<h3>"Sessiz Anlama" - Canvas Baskı</h3>
+						<p class="product-type">Akrilik</p>
+						<div class="price-section">
+							<span class="price">₺3.200</span>
+							<button class="primary-btn" onclick="addToCart('Sessiz Anlama',3200)">Satın Al</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="view-all">
+				<a href="urunler.html"><button class="primary-btn">Tüm Eserler Gözat</button></a>
+			</div>
+		</div>
+	</section>
+
+	<!-- About Section -->
+	<section id="hak" class="about">
+		<div class="container">
+			<div class="about-content">
+				<div class="about-text">
+					<h2>Sanatçı Hakkında</h2>
+					<p>Merve Gezer, İzmir doğumlu bir sanatçıdır... (kısa biyografi)</p>
+					
+				</div>
+				<div class="about-image">
+					<img src="img/image.png" alt="Sanatçı Portresi">
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer" id="iletisim">
+		<div class="container">
+			<div class="footer-contact" style="text-align:center; padding: 2rem 0; color: #fff;">
+				<h2>İletişim</h2>
+				<p>📧 info@studio.com</p>
+				<p>📍 Evka 3 Bornava İzmir, Türkiye</p>
+			</div>
+			<div class="footer-social" style="text-align:center; margin-bottom: 1.5rem;">
+				<a href="https://www.instagram.com/gezermerve.art" target="_blank" class="social-icon" title="Instagram" style="margin:0 10px;color:#fff;">
+					<i class="fa-brands fa-instagram"></i> Instagram
+				</a>
+				<a href="https://youtube.com/@gezermerveart" target="_blank" class="social-icon" title="Youtube" style="margin:0 10px;color:#fff;">
+					<i class="fa-brands fa-youtube"></i> Youtube
+				</a>
+			</div>
+			<div class="footer-bottom" style="text-align:center; padding: 1rem 0; color: #fff;">
+				<p>&copy; 2025 STUDIO. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Product Detail Modal -->
+	<div class="product-modal" id="productModal">
+		<div class="product-detail-container">
+			<img id="modalImage" src="" alt="Ürün" class="product-detail-image">
+			<div class="product-detail-content">
+				<button class="close-modal" onclick="closeProductModal()">&times;</button>
+				<div>
+					<h2 id="modalTitle"></h2>
+					<div class="product-detail-meta">
+						<span id="modalType"></span>
+						<span id="modalSize"></span>
+					</div>
+					<div class="product-detail-price" id="modalPrice"></div>
+					<p class="product-detail-description" id="modalDescription"></p>
+				</div>
+				<div class="product-detail-actions">
+					<button class="detail-btn primary" onclick="addToCartFromModal()">Sepete Ekle</button>
+					<button class="detail-btn secondary" onclick="closeProductModal()">Kapat</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Paint Splash Animation - Sayfa yüklendiğinde animasyonu başlat
+		window.addEventListener('load', function() {
+			const paintSplash = document.getElementById('paintSplash');
+			if (paintSplash) {
+				// Animasyon tamamlandıktan sonra (4.3 saniye) splash screen'i kaldır
+				setTimeout(function() {
+					paintSplash.classList.add('hidden');
+					document.body.style.overflow = '';
+				}, 4300);
+			}
+		});
+
+		// Sayfa yüklenmeden önce body'yi kilitle
+		document.body.style.overflow = 'hidden';
+
+		const SHOPIER_URL = 'https://www.shopier.com/mervegezer';
+		// Ürün modal işlevleri
+		let currentProduct = {};
+		function openProductModal(title, image, price, type, size, description) {
+			currentProduct = { title, price };
+			document.getElementById('modalTitle').textContent = title;
+			document.getElementById('modalImage').src = image;
+			document.getElementById('modalPrice').textContent = price;
+			document.getElementById('modalType').textContent = type;
+			document.getElementById('modalSize').textContent = size;
+			document.getElementById('modalDescription').textContent = description;
+			document.getElementById('productModal').classList.add('active');
+		}
+		function closeProductModal() {
+			document.getElementById('productModal').classList.remove('active');
+		}
+		function addToCart(productName, price) {
+			window.open(SHOPIER_URL, '_blank', 'noopener');
+		}
+		function addToCartFromModal() {
+			addToCart(currentProduct.title, currentProduct.price);
+			closeProductModal();
+		}
+		document.getElementById('productModal').addEventListener('click', function(e) {
+			if (e.target === this) closeProductModal();
+		});
+
+		// Mobil menü toggle
+		function toggleMenu(){
+			const btn = document.querySelector('.hamburger');
+			const menu = document.querySelector('.nav-menu');
+			if(!btn || !menu) return;
+			const isOpen = btn.classList.toggle('active');
+			menu.classList.toggle('active');
+			btn.setAttribute('aria-expanded', String(isOpen));
+			if(isOpen) document.body.style.overflow = 'hidden';
+			else document.body.style.overflow = '';
+		}
+		// Menü linkine tıklanırsa kapat (mobil)
+		document.addEventListener('click', function(e){
+			if (window.innerWidth <= 768 && e.target.closest('.nav-menu a')) {
+				const btn = document.querySelector('.hamburger');
+				const menu = document.querySelector('.nav-menu');
+				if (menu) menu.classList.remove('active');
+				if (btn) { btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+				document.body.style.overflow = '';
+			}
+		});
+
+		// ESC ile modal veya mobil menüyü kapat
+document.addEventListener('keydown', function(e){
+	if (e.key === 'Escape' || e.key === 'Esc') {
+		const pm = document.getElementById('productModal');
+		if (pm && pm.classList.contains('active')) pm.classList.remove('active');
+
+		const btn = document.querySelector('.hamburger');
+		const menu = document.querySelector('.nav-menu');
+		if (menu && menu.classList.contains('active')) {
+			menu.classList.remove('active');
+			if (btn) { btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+			document.body.style.overflow = '';
+		}
+	}
+});
+
+// Pencere yeniden boyutlandığında (masaüstüne dönüldüğünde) menüyü kapat
+window.addEventListener('resize', function(){
+	if(window.innerWidth > 768){
+		const btn = document.querySelector('.hamburger');
+		const menu = document.querySelector('.nav-menu');
+		if (menu) menu.classList.remove('active');
+		if (btn) { btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+		document.body.style.overflow = '';
+	}
+});
+	</script>
+
+
+</body>
+
+
+</html>
+
